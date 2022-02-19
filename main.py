@@ -61,7 +61,7 @@ def find_new_ntt(board_info):
                 db_conn.commit()
     except:
         now = time.localtime()
-        message = "EXCEPT!! " + board_info
+        message = "EXCEPT!! " + board_info[1]
         message += "%04d/%02d/%02d %02d:%02d:%02d" % (now.tm_year, now.tm_mon, now.tm_mday, now.tm_hour, now.tm_min, now.tm_sec)
         encode_message = parse.quote(message)
         url = 'https://api.telegram.org/bot' + setting.bot_token + '/sendmessage?chat_id=' + setting.admin_channel + '&text=' + encode_message
