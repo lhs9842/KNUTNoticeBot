@@ -31,7 +31,7 @@ def send_message(channel, message):
 def find_new_ntt(board_info):
     try:
         url = 'https://www.ut.ac.kr/cop/bbs/' + board_info[0] + '/selectBoardList.do'
-        response = requests.get(url)
+        response = requests.get(url, verify=False)
         if response.status_code == 200:
             db_cur.execute("SELECT final_nttId FROM final_ntt WHERE boardId='" + board_info[0] + "'")
             rows = db_cur.fetchall()
