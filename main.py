@@ -25,6 +25,18 @@ def send_message(channel, message):
     encode_message = parse.quote(message)
     url = 'https://api.telegram.org/bot' + setting.bot_token + '/sendmessage?chat_id=' + channel + '&text=' + encode_message
     response = requests.get(url)
+    url = 'https://api.line.me/v2/bot/message/broadcast'
+    send_header = {
+        "Content-Type" : "application/json",
+        "Authorization" : "Bearer " + setting.line_token
+        }
+    send_data = {
+        "messages" : [
+            { "type" : "text", "text" : message }
+            ]
+        }
+    
+    response = requests.post(url, headers=send_header, json=send_data)
     if response.status_code != 200:
         print("ERROR!!" + str(response.status_code))
 
